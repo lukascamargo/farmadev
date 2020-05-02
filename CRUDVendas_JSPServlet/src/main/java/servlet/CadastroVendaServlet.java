@@ -9,6 +9,7 @@ import DAO.VendaDAO;
 import entidade.Venda;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,13 +33,13 @@ public class CadastroVendaServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int IDVenda = request.getParameter("IDVenda");
-        int IDProduto = request.getParameter("IDProduto");
+        int IDVenda = request.getIntHeader("IDVenda");
+        int IDProduto = request.getIntHeader("IDProduto");
         String descricao = request.getParameter("descricao");
-        int quantidade = request.getParameter("quantidade");
+        int quantidade = request.getIntHeader("quantidade");
         double valorUnitario = request.getParameter("valorUnitario");
-        double total = request.getParameter("total");
-        int dataVenda = request.getParameter("dataVenda");
+        double total = request.getParameter"total");
+        String dataVenda = request.getParameter("dataVenda");
         
         Venda venda = new Venda(IDVenda, IDProduto, descricao, quantidade, valorUnitario, total, dataVenda);
         boolean ok = VendaDAO.cadastrarVenda(venda);

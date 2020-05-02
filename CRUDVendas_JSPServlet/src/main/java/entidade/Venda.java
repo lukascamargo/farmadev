@@ -17,9 +17,9 @@ public class Venda {
     private int quantidade;
     private double valorUnitario;
     private double total;
-    private int dataVenda;
+    private String dataVenda;
 
-    public Venda(int IDVenda, int IDProduto, String descricao, int quantidade, double valorUnitario, double total, int dataVenda) {
+    public Venda(int IDVenda, int IDProduto, String descricao, int quantidade, int valorUnitario, int total, String dataVenda) {
         this.IDVenda = IDVenda;
         this.IDProduto = IDProduto;
         this.descricao = descricao;
@@ -77,11 +77,11 @@ public class Venda {
         this.total = total;
     }
 
-    public int getDataVenda() {
+    public String getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(int dataVenda) {
+    public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
     

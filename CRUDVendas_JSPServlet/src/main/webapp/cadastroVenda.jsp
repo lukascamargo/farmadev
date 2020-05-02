@@ -10,7 +10,7 @@
         <form action="CadastroClienteServlet" method="POST">
                ID venda:<input type="text" name="IDVenda"/><br>
                ID produto:<input type="text" name="IDProduto"/><br>
-               descrição:<input type="text" name="descicao"/><br>
+               descrição:<input type="text" name="descricao"/><br>
                quantidade:<input type="text" name="quantidade"/><br>
                valor unitário:<input type="text" name="valorUnitario"/><br>
                total:<input type="text" name="total"/><br>

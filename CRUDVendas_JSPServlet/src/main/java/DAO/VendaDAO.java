@@ -28,11 +28,11 @@ public class VendaDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, venda.getIDVenda());
             ps.setInt(2, venda.getIDProduto());
-            ps.setString(1, venda.getDescricao());
-            ps.setInt(1, venda.getQuantidade());
-            ps.setDouble(1, venda.getValorUnitario());
-            ps.setDouble(1, venda.getTotal());
-            ps.setDouble(1, venda.getDataVenda());
+            ps.setString(3, venda.getDescricao());
+            ps.setInt(4, venda.getQuantidade());
+            ps.setDouble(5, venda.getValorUnitario());
+            ps.setDouble(6, venda.getTotal());
+            ps.setString(7, venda.getDataVenda());
             ps.execute();
             ok = true;
         } catch (SQLException ex) {
