@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.db;
+package ConexaoDB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,15 +13,14 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author tiago.bscarton
+ * @author italo
  */
-public class ConexaoDB {
-
+public class Conexao {
     static {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConexaoDB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -31,5 +30,4 @@ public class ConexaoDB {
         String password = "senac";
         return DriverManager.getConnection(dbURL, user, password);
     }
-
 }
