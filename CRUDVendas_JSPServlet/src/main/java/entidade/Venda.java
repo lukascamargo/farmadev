@@ -12,21 +12,19 @@ package entidade;
 public class Venda {
     
     private int IDVenda;
-    private int IDProduto;
-    private String descricao;
-    private int quantidade;
-    private double valorUnitario;
+    private int CPFCliente;
+    private double desconto;
     private double total;
     private String dataVenda;
+    private String usuario;
 
-    public Venda(int IDVenda, int IDProduto, String descricao, int quantidade, int valorUnitario, int total, String dataVenda) {
+    public Venda(int IDVenda, int CPFCliente, double desconto, double total, String dataVenda,String usuario) {
         this.IDVenda = IDVenda;
-        this.IDProduto = IDProduto;
-        this.descricao = descricao;
-        this.quantidade = quantidade;
-        this.valorUnitario = valorUnitario;
+        this.CPFCliente = CPFCliente;
+        this.desconto = desconto;
         this.total = total;
         this.dataVenda = dataVenda;
+        this.usuario = usuario;
     }
 
     public int getIDVenda() {
@@ -37,36 +35,20 @@ public class Venda {
         this.IDVenda = IDVenda;
     }
 
-    public int getIDProduto() {
-        return IDProduto;
+    public int getCPFCliente() {
+        return CPFCliente;
     }
 
-    public void setIDProduto(int IDProduto) {
-        this.IDProduto = IDProduto;
+    public void setCPFCliente(int CPFCliente) {
+        this.CPFCliente = CPFCliente;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public double getDesconto() {
+        return desconto;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
+    public void setDesconto(double desconto) {
+        this.desconto = desconto;
     }
 
     public double getTotal() {
@@ -84,9 +66,14 @@ public class Venda {
     public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
-    
-    
-    
-    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     
 }

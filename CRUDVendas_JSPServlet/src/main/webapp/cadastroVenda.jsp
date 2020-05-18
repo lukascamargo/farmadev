@@ -7,14 +7,13 @@
     </head>
     <body>
         <h1>Formulário de Cadastro</h1>
-        <form action="CadastroClienteServlet" method="POST">
+        <form action="CadastroVendaServlet" method="POST">
                ID venda:<input type="text" name="IDVenda"/><br>
-               ID produto:<input type="text" name="IDProduto"/><br>
-               descrição:<input type="text" name="descricao"/><br>
-               quantidade:<input type="text" name="quantidade"/><br>
-               valor unitário:<input type="text" name="valorUnitario"/><br>
+               CPF cliente:<input type="text" name="CPFCliente"/><br>
+               desconto:<input type="text" name="desconto"/><br>
                total:<input type="text" name="total"/><br>
                data venda:<input type="text" name="dataVenda"/><br>
+               usuario:<input type="text" name="usuario"/><br>
                <button type="submit" >Enviar</button>
         </form>
     </body>

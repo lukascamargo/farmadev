@@ -5,8 +5,8 @@
  */
 package servlet;
 
-import DAO.VendaDAO;
-import entidade.Venda;
+import DAO.ItensVendaDAO;
+import entidade.ItensVenda;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rapha
  */
-public class CadastroVendaServlet extends HttpServlet{
+public class CadastroItensVendaServlet extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,14 +34,15 @@ public class CadastroVendaServlet extends HttpServlet{
             throws ServletException, IOException {
 
         int IDVenda = request.getIntHeader("IDVenda");
-        int CPFCliente = request.getIntHeader("CPFCliente");
-        double desconto = Double.parseDouble(request.getParameter("desconto"));
+        int produtoID = request.getIntHeader("produtoID");
+        String descricao = request.getParameter("descricao");
+        int quantidade = request.getIntHeader("quantidade");
+        double valorUnitario = Double.parseDouble(request.getParameter("valorUnitario"));
         double total = Double.parseDouble(request.getParameter("total"));
         String dataVenda = request.getParameter("dataVenda");
-        String usuario = request.getParameter("usuario");
         
-        Venda venda = new Venda(IDVenda,CPFCliente, desconto, total, dataVenda, usuario);
-        boolean ok = VendaDAO.cadastrarVenda(venda);
+        ItensVenda item_venda = new ItensVenda(IDVenda,produtoID, descricao,quantidade, valorUnitario, total,dataVenda);
+        boolean ok = ItensVendaDAO.cadastrarItensVenda(item_venda);
         PrintWriter out = response.getWriter();
 
         String url = "";
