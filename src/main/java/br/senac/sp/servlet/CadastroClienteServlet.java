@@ -37,7 +37,7 @@ public class CadastroClienteServlet extends HttpServlet {
         } else {
             url = "/erro.jsp";
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cadastroCliente.jsp");
             dispatcher.forward(request,response);
        
 
