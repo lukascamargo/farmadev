@@ -7,8 +7,10 @@ package br.senac.sp.servlet;
 
 import br.senac.sp.dao.ClienteDAO;
 import br.senac.sp.entidade.Cliente;
+import br.senac.sp.entidade.ItensVenda;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +20,21 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tscarton
+ * @author KIQ
  */
-public class ListarClientes extends HttpServlet {
+public class ItensVendaServlet extends HttpServlet {
+
+    public static List<ItensVenda> item;
+
+    public static List<ItensVenda> getItem() {
+        return item;
+    }
+
+    public static void setItem(List<ItensVenda> item) {
+        ItensVendaServlet.item = item;
+    }
+
+    List<ItensVenda> vnd = new ArrayList<>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +48,29 @@ public class ListarClientes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Cliente> clientes = ClienteDAO.listarClientes();
-        request.setAttribute("clientes", clientes);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
-        dispatcher.forward(request,response);
+        try (PrintWriter out = response.getWriter()) {
+
+            //  int sid = Integer.parseInt(request.getParameter("ItensVendaID"));
+            //  itens.add(ProdutosDAO.produtoSelecionado(sid));
+            //  request.setAttribute("itens", itens);
+            int produtoID = Integer.parseInt(request.getParameter("Produto"));
+            String descricao = request.getParameter("Descricao");
+            int quantidade = Integer.parseInt(request.getParameter("Quantidade"));
+            double valorUnitario = Double.parseDouble(request.getParameter("ValorUnitario"));
+            double total = Double.parseDouble(request.getParameter("Total"));
+            String dataVenda = "";
+
+            //   ItensVenda ivn = new ItensVenda(produtoID, descricao, quantidade, valorUnitario, total, dataVenda);
+            request.setAttribute("vnd", vnd);
+            vnd.add(new ItensVenda(produtoID, descricao, quantidade, valorUnitario, total, dataVenda));
+            setItem(vnd);
+
+            List<Cliente> cli = ClienteDAO.BuscarClientes(ListarClienteVenda.getIDC());
+            request.setAttribute("cli", cli);
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/preVenda.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

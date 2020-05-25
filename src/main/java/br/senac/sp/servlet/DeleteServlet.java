@@ -6,21 +6,20 @@
 package br.senac.sp.servlet;
 
 import br.senac.sp.dao.ClienteDAO;
-import br.senac.sp.entidade.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tscarton
+ * @author KIQ
  */
-public class ListarClientes extends HttpServlet {
+@WebServlet(name = "DeleteServlet", urlPatterns = {"/DeleteServlet"})
+public class DeleteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,13 +31,12 @@ public class ListarClientes extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Cliente> clientes = ClienteDAO.listarClientes();
-        request.setAttribute("clientes", clientes);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
-        dispatcher.forward(request,response);
+        String sid = request.getParameter("ID");
+        ClienteDAO.excluir(sid);
+        response.sendRedirect("ListarClientes");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

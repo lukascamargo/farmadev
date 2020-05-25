@@ -5,22 +5,25 @@
  */
 package br.senac.sp.servlet;
 
-import br.senac.sp.dao.ClienteDAO;
-import br.senac.sp.entidade.Cliente;
+import br.senac.sp.dao.ProdutosDAO;
+import br.senac.sp.entidade.Produto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tscarton
+ * @author KIQ
  */
-public class ListarClientes extends HttpServlet {
+@WebServlet(name = "EditarProduto", urlPatterns = {"/EditarProduto"})
+public class EditarProduto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +37,11 @@ public class ListarClientes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Cliente> clientes = ClienteDAO.listarClientes();
-        request.setAttribute("clientes", clientes);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
+          int pid = Integer.parseInt(request.getParameter("PRD_ID"));
+       List<Produto> produto = ProdutosDAO.BuscarProdutos(pid);  
+        request.setAttribute("produto", produto);
+       
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atualizarProduto.jsp");
         dispatcher.forward(request,response);
     }
 
@@ -66,8 +70,31 @@ public class ListarClientes extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException { 
+           
+        int sid = Integer.parseInt(request.getParameter("PRD_ID"));         
+        String filial= request.getParameter("PRD_FILIAL");
+        String descricao = request.getParameter("PRD_DESCRICAO");
+        int quantidade = Integer.parseInt(request.getParameter("PRD_QUANTIDADE"));
+        double valor = Double.parseDouble(request.getParameter("PRD_VALOR_UNIT"));
+        String categoria= request.getParameter("PRD_CATEGORIA");
+
+
+        Produto e = new Produto(filial, descricao, quantidade, valor, categoria,sid);
+                
+       boolean ok =ProdutosDAO.update(e);
+        if (ok =! false) {
+            request.setAttribute("/sucesso.jpg", true);
+                  
+        } else {
+            out.println("Erro");
+        }
+
+        out.close();
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ListarProdutos");
+            dispatcher.forward(request,response);
+
+        
     }
 
     /**
@@ -81,3 +108,4 @@ public class ListarClientes extends HttpServlet {
     }// </editor-fold>
 
 }
+

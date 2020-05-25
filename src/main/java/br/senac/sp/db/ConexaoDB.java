@@ -19,17 +19,18 @@ public class ConexaoDB {
 
     static {
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConexaoDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static Connection getConexao() throws SQLException {
-        String dbURL = "jdbc:derby://localhost:1527/senac;create=true";
-        String user = "senac";
-        String password = "senac";
-        return DriverManager.getConnection(dbURL, user, password);
+        String dbURL = "jdbc:mysql://senac.cyraroqtaoi8.sa-east-1.rds.amazonaws.com:3307/senac1?useTimezone=true&serverTimezone=UTC";
+        //"jdbc:mysql://localhost:3307/senac1?useTimezone=true&serverTimezone=UTC";
+        String user = "admin";
+        String password = "adminadmin";
+        return DriverManager.getConnection(dbURL, user, password);   
     }
 
 }

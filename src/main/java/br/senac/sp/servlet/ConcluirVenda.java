@@ -6,10 +6,12 @@
 package br.senac.sp.servlet;
 
 import br.senac.sp.dao.ClienteDAO;
-import br.senac.sp.entidade.Cliente;
+import br.senac.sp.dao.VendasDAO;
+import br.senac.sp.entidade.Venda;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import br.senac.sp.servlet.ListarClienteVenda;
+ 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tscarton
+ * @author diego
  */
-public class ListarClientes extends HttpServlet {
+public class ConcluirVenda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +36,23 @@ public class ListarClientes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Cliente> clientes = ClienteDAO.listarClientes();
-        request.setAttribute("clientes", clientes);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
-        dispatcher.forward(request,response);
+        try (PrintWriter out = response.getWriter()) {
+                             
+      String cpf = ListarClienteVenda.getCPF();
+      double desconto = Double.parseDouble("00");
+      double total = Double.parseDouble("00");
+      String data = "";
+      String usuario = "anonimus";
+      
+      
+     Venda vnd = new Venda ("1",usuario, cpf, total, data, desconto );
+      
+      VendasDAO.Concluir(vnd);
+      
+     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/sucesso.jsp");
+            dispatcher.forward(request,response);
+      
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

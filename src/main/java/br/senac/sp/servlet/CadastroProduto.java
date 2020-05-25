@@ -1,7 +1,7 @@
 package br.senac.sp.servlet;
 
-import br.senac.sp.dao.ClienteDAO;
-import br.senac.sp.entidade.Cliente;
+import br.senac.sp.dao.ProdutosDAO;
+import br.senac.sp.entidade.Produto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class CadastroClienteServlet extends HttpServlet {
+public class CadastroProduto extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,20 +23,16 @@ public class CadastroClienteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String cpf = request.getParameter("cpf");
-        //Integer.parseInt(request.getParameter("cpf"));
-        String endereco = request.getParameter("endereco");
-        String telefone = request.getParameter("telefone");
-        String genero = request.getParameter("genero");
-        String estadoCivil = request.getParameter("estadoCivil");
-
+        String filial = request.getParameter("PRD_FILIAL");
+        String descriçao = request.getParameter("PRD_DESCRICAO");
+        int quantidade = Integer.parseInt(request.getParameter("PRD_QUANTIDADE"));        
+       // Integer.parseInt(request.getParameter("PRD_QUANTIDADE"));
+        double valor = Double.parseDouble(request.getParameter("PRD_VALOR_UNIT"));
+        String categoria = request.getParameter("PRD_CATEGORIA");
+        Produto produto = new Produto(filial, descriçao, quantidade, valor, categoria);
+        boolean ok = ProdutosDAO.cadastrarProduto(produto);
+        PrintWriter out = response.getWriter();        
         
-        Cliente cliente = new Cliente(nome, email, cpf, endereco, telefone, genero, estadoCivil);
-        boolean ok = ClienteDAO.cadastrarCliente(cliente);
-        PrintWriter out = response.getWriter();
-
         String url = "";
         if (ok) {
             request.setAttribute("cadastroOK", true);
@@ -46,8 +42,6 @@ public class CadastroClienteServlet extends HttpServlet {
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request,response);
-       
-
     }
 
     /**

@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de Clientes</title>
+        <title>Lista de Produtos</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
 
@@ -18,34 +18,30 @@
         <div align="center">
             <table border="3" cellpadding="5">
 
-                <th>Nome</th>
-                <th>Email</th>
-                <th>CPF</th>
-                <th>Endereço</th>
-                <th>Telefone</th>
-                <th>Gênero</th>
-                <th>Estado Civil</th>
+                <th>Filial</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+                <th>Categoria</th>
 
 
-                <c:forEach var="c" items="${clientes}">
+                <c:forEach var="c" items="${produtos}">
                     <tr>
 
-                        <td>${c.nome}</td>
-                        <td>${c.email}</td>
-                        <td>${c.cpf}</td>
-                        <td>${c.endereco}</td>
-                        <td>${c.telefone}</td>
-                        <td>${c.genero}</td>
-                        <td>${c.estadoCivil}</td>
+                        <td>${c.filial}</td>
+                        <td>${c.descricao}</td>
+                        <td>${c.quantidade}</td>
+                        <td>${c.valor}</td>
+                        <td>${c.categoria}</td>
                         <td> 
                             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-                            <form action="DeleteServlet">
-                                <input name="ID" type="hidden" size=1 value="${c.id}">                              
+                            <form action="DeletarProduto">
+                                <input name="PRD_ID" type="hidden" size=1 value="${c.id}">                              
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-outline-danger" type="submit">deletar</button>  
                             </form>   
-                            <form action="EditarServlet">
-                                <input name="ID"  type="hidden"  value="${c.id}">                              
+                            <form action="EditarProduto">
+                                <input name="PRD_ID"  type="hidden"  value="${c.id}">                              
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button type="submit">Editar</button>  
                             </form>   
@@ -56,7 +52,7 @@
                 <tr></tr>
             </table>
 
-            <param name="ID" value="${c.id}">
+            <param name="PRD_ID" value="${c.id}">
             <a href="index.html">Início</a>
 
     </body>

@@ -6,7 +6,9 @@
 package br.senac.sp.servlet;
 
 import br.senac.sp.dao.ClienteDAO;
+import br.senac.sp.dao.ProdutosDAO;
 import br.senac.sp.entidade.Cliente;
+import br.senac.sp.entidade.Produto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author tscarton
  */
-public class ListarClientes extends HttpServlet {
+public class ListarProdutos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,9 +37,9 @@ public class ListarClientes extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        List<Cliente> clientes = ClienteDAO.listarClientes();
-        request.setAttribute("clientes", clientes);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
+        List<Produto> produtos = ProdutosDAO.listarProdutos();
+        request.setAttribute("produtos", produtos);       
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarProdutos.jsp");
         dispatcher.forward(request,response);
     }
 

@@ -9,6 +9,7 @@ import br.senac.sp.dao.ClienteDAO;
 import br.senac.sp.entidade.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tscarton
+ * @author diego
  */
-public class ListarClientes extends HttpServlet {
+public class ListarClienteVenda extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,14 +32,34 @@ public class ListarClientes extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public static int IDC;
+    public static String CPF;
+
+    public static String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public static int getIDC() {
+        return IDC;
+    }
+
+    public void setIDC(int IDC) {
+        this.IDC = IDC;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Cliente> clientes = ClienteDAO.listarClientes();
-        request.setAttribute("clientes", clientes);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
-        dispatcher.forward(request,response);
+        try (PrintWriter out = response.getWriter()) {
+            List<Cliente> clientes = ClienteDAO.listarClientes();
+            request.setAttribute("clientes", clientes);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientesVendas.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,7 +88,18 @@ public class ListarClientes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int sid = Integer.parseInt(request.getParameter("ID"));
+
+        String cpf = request.getParameter("CPF");
+        setCPF(cpf);
+        setIDC(sid);
+
+        List<Cliente> cli = ClienteDAO.BuscarClientes(sid);
+        request.setAttribute("cli", cli);
+
+        out.close();
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/preVenda.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
