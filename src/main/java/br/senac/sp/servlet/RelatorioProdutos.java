@@ -5,10 +5,11 @@
  */
 package br.senac.sp.servlet;
 
-
 import br.senac.sp.dao.VendasDAO;
 import br.senac.sp.entidade.Venda;
+import br.senac.sp.entidade.VendasProdutos;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,36 +21,40 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author diego
  */
-public class RelatorioFiliais extends HttpServlet{
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+public class RelatorioProdutos extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
-    private String filial;
+     private String filial;
     private String dataini;
     private String datafim;
+    private String produto;
+     private String categoria;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          this.filial = request.getParameter("Filial");
+              this.filial = request.getParameter("filial");
           this.dataini = request.getParameter("dataini");
           this.datafim = request.getParameter("datafim");
+          this.produto = request.getParameter("produto");
+          this.categoria = request.getParameter("categoria");
           
-            List<Venda> vendas = VendasDAO.listarVendas("="+filial, dataini,datafim);
+            List<VendasProdutos> vendas = VendasDAO.ListarItensVendaXProduto("="+filial,"='"+produto+"'","='"+categoria+"'",dataini,datafim);
             
-        request.setAttribute("Vendas", vendas);
+        request.setAttribute("VendasProdutos", vendas);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/relatorioFiliais.jsp");
+          RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/relatorioProduto.jsp");
         dispatcher.forward(request,response);
+        
     }
-
-    public String getFilial() {
-        return filial;
-    }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -77,9 +82,7 @@ public class RelatorioFiliais extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String filial = request.getParameter("sfilial");
-          processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -93,6 +96,3 @@ public class RelatorioFiliais extends HttpServlet{
     }// </editor-fold>
 
 }
-
-    
-

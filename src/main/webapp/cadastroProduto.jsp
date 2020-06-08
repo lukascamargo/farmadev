@@ -1,3 +1,10 @@
+<%-- 
+    Document   : cadastroProduto
+    Created on : 22/05/2020, 21:13:06
+    Author     : Renato
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +24,6 @@
     </head>
     <img src="logo_farmasis.jpg" height="80" width="180">
     <img src="logo_drogaria.jpg" height="80" width="180" align="right">
-
     <body>
         <h4 style="text-align: center;"> </h4>
         <div id="retangulo" style="text-align:center; width:100%; height:30px; background-color:#23EBA7">
@@ -36,48 +42,48 @@
             <a href="listarProdutos.jsp">Listar Produtos</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="ListarClienteVenda">venda</a>
-        </div>					<div class="jumbotron jumbotron-fluid p-1">
+        </div>	
+        <div class="jumbotron jumbotron-fluid p-1">
             <div class="container-fluid mr-5"> 
-                <h1 class="display-5">Cadastro de Clientes</h1>
-
+                <h1 class="display-5">Cadastro de produtos</h1>
 
                 <div class="form-group">
-                    <form action="CadastroClienteServlet" method="POST">
+                    <form action="CadastroProduto" method="POST">
 
                         <div class="form-row border">
                             <div class="form-group col-md-auto">
-                                <label> Nome </label>
-                                <input type="text" class="form-control" name= "nome">
+                                <label>Filial :</label>
+                                <select name="Filial" id="sfilial" class="form-control mx-sm-0 mb-2">
+                                    <option ></option>
+                                    <option value="1">Filial 1</option>
+                                    <option value="2">Filial 2</option>
+                                    <option value="3">Filial 3</option>
+                                </select> 
                             </div>
 
                             <div class="form-group col-md-5px">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name= "email" placeholder="digite seu e-mail aqui"/>
+                                <label>DescriÃ§Ã£o:</label>
+                                <input type="text" class="form-control" name= "PRD_DESCRICAO"/>
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label>CPF</label>
-                                <input type="text" class="form-control" name= "cpf"/>
+                                <label>Quantidade:</label>
+                                <input type="text" class="form-control" name= "PRD_QUANTIDADE"/>
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label> Endereço </label>
-                                <input type="text" class="form-control" name= "endereco">
+                                <label> Valor unitario: </label>
+                                <input type="text" class="form-control" name= "PRD_VALOR_UNIT">
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label> Telefone </label>
-                                <input type="text" class="form-control" name= "telefone">
-                            </div>
-
-                            <div class="form-group col-md-auto">
-                                <label> Gênero </label>
-                                <input type="text" class="form-control" name= "genero">
-                            </div>
-
-                            <div class="form-group col-md-auto">
-                                <label> Estado Civil </label>
-                                <input type="text" class="form-control" name= "estadoCivil">
+                                <label> Categoria: </label>
+                                <select name="PRD_CATEGORIA" class="form-control mx-sm-0 mb-2">
+                                    <option ></option>
+                                    <option value="BELEZA">BELEZA</option>
+                                    <option value="EQUIPAMENTOS">EQUIPAMENTOS</option>
+                                    <option value="SAUDE">SAUDE</option>
+                                </select> 
                             </div>
 
                         </div>  
@@ -88,9 +94,8 @@
                         </div>
                     </form>
                 </div>
-                <div align="center">                     
-                    <a href="index.html">Início</a>   
-                </div>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+                <center>
+                    <a href="index.html">InÃ­cio</a>
+                </center>
                 </body>
                 </html>

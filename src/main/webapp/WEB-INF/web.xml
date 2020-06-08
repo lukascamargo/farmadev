@@ -4,17 +4,129 @@
         <servlet-name>CadastroClienteServlet</servlet-name>
         <servlet-class>br.senac.sp.servlet.CadastroClienteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListarClientes</servlet-name>
+        <servlet-class>br.senac.sp.servlet.ListarClientes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarProdutos</servlet-name>
+        <servlet-class>br.senac.sp.servlet.ListarProdutos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastroProduto</servlet-name>
+        <servlet-class>br.senac.sp.servlet.CadastroProduto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletarProduto</servlet-name>
+        <servlet-class>br.senac.sp.servlet.DeletarProduto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarProduto</servlet-name>
+        <servlet-class>br.senac.sp.servlet.EditarProduto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>atualizarProduto</servlet-name>
+        <servlet-class>atualizarProduto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ItensVendaServlet</servlet-name>
+        <servlet-class>br.senac.sp.servlet.ItensVendaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RelatorioProdutos</servlet-name>
+        <servlet-class>br.senac.sp.servlet.RelatorioProdutos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilialVenda</servlet-name>
+        <servlet-class>br.senac.sp.servlet.FilialVenda</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastroClienteServlet</servlet-name>
         <url-pattern>/CadastroClienteServlet</url-pattern>
     </servlet-mapping>
-<servlet>
+    <servlet>
+        <servlet-name>EditarServlet</servlet-name>
+        <servlet-class>br.senac.sp.servlet.EditarServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditarServlet</servlet-name>
+        <url-pattern>/EditarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarClientes</servlet-name>
+        <url-pattern>/ListarClientes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarProdutos</servlet-name>
+        <url-pattern>/ListarProdutos</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>RelatorioFiliais</servlet-name>
         <servlet-class>br.senac.sp.servlet.RelatorioFiliais</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RelatorioFiliais</servlet-name>
         <url-pattern>/RelatorioFiliais</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RelatorioClientes</servlet-name>
+        <servlet-class>br.senac.sp.servlet.RelatorioClientes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RelatorioClientes</servlet-name>
+        <url-pattern>/RelatorioClientes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastroProduto</servlet-name>
+        <url-pattern>/CadastroProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletarProduto</servlet-name>
+        <url-pattern>/DeletarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarProduto</servlet-name>
+        <url-pattern>/EditarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>atualizarProduto</servlet-name>
+        <url-pattern>/atualizarProduto</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ConcluirVenda</servlet-name>
+        <servlet-class>br.senac.sp.servlet.ConcluirVenda</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConcluirVenda</servlet-name>
+        <url-pattern>/ConcluirVenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarItensVenda</servlet-name>
+        <url-pattern>/ListarItensVenda</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ListarItensVenda</servlet-name>
+        <servlet-class>br.senac.sp.servlet.ListarItensVenda</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarClienteVenda</servlet-name>
+        <servlet-class>br.senac.sp.servlet.ListarClienteVenda</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListarClienteVenda</servlet-name>
+        <url-pattern>/ListarClienteVenda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItensVendaServlet</servlet-name>
+        <url-pattern>/ItensVendaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioProdutos</servlet-name>
+        <url-pattern>/RelatorioProdutos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilialVenda</servlet-name>
+        <url-pattern>/FilialVenda</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

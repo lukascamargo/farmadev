@@ -1,13 +1,13 @@
 <%-- 
-    Document   : relatorioFiliais
-    Created on : 16/05/2020, 22:30:46
+    Document   : relatorioClientes
+    Created on : 20/05/2020, 23:39:24
     Author     : diego
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+       <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
         <title>'FarmaSis</title>
@@ -45,13 +45,12 @@
             <a href="ListarClienteVenda">venda</a>
         </div>					<div class="jumbotron jumbotron-fluid p-1">
             <div class="container-fluid mr-5"> 
-                <h1 class="display-5">Relatorio por filiais</h1>
+                <h1 class="display-5">Relatorio por cliente</h1>
 
-
-                <form action="RelatorioFiliais">
+                <form action="RelatorioClientes">
                     <div class="form-inline" style="float:right;">
                         <select name="Filial" id="sfilial" class="form-control mx-sm-0 mb-2">
-                            <option>Selecione Filial</option>
+                            <option value="">Selecione Filial</option>
                             <option value="1">Filial 1</option>
                             <option value="2">Filial 2</option>
                             <option value="3">Filial 3</option>
@@ -61,6 +60,10 @@
                     <div
                         <div class="form-group">
                             <div class="form-row border ">
+                                <div class="form-group col-md-5px">
+                                    <label> CPF: </label>
+                                    <input type="text" class="form-control" name="relatorio_cpf"/>
+                                </div>
                                 <div class="form-group col-md-5px">
                                     <label> Data inicial: </label>
                                     <input type="text" class="form-control" name="dataini" placeholder="ano-mes-dia"/>
@@ -74,42 +77,39 @@
                         <button class="btn btn-primary" type="submit" >Consultar</button>
                 </form>
                 <br><br>
-                <center>
+
                 <table class="table"  >
                     <thead class="table-dark" >
 
-
-                    <th scope="col">IdVenda</th>
-                    <th scope="col">Filial</th>
+                    <th scope="col">IdVenda</th> 
+                    <th scope="col">Filial</th>            
                     <th scope="col">CPF</th>
                     <th scope="col">Total</th>
                     <th scope="col">Data</th>
                     <th scope="col">Desconto</th>
                     <th scope="col">Usuario</th>
-
-
-
                     </thead>
-                    <c:forEach var="c" items="${Vendas}">
 
+                    <c:forEach var="c" items="${Vendas}">
                         <tr>
+                            
+                                         
                             <td>${c.id}</td>                    
                             <td>${c.filial}</td>
                             <td>${c.cpf}</td>
                             <td>${c.total}</td>
-                            <td >${c.data}</td>
-                            <td >${c.desconto}</td>
+                            <td>${c.data}</td>
+                            <td>${c.desconto}</td>
                             <td>${c.usuario}</td>
-
-                        </tr>
+                           
+                           </tr>   
                     </c:forEach>
 
                     <tr></tr>
                 </table>
-                    </center>
                 <br>
                 <center>
-                    <a href="index.html">Início</a>
+                <a href="index.html">Início</a>
                 </center>
                 </body>
                 </html>

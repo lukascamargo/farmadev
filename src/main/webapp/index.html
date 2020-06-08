@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inicio</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>'FarmaSis</title>
+        <style>
+            a{
+                font-family: verdana;
+                font-size:18px;
+                color:#5298C7;
+                text-decoration: none;	
+            }
+
+            p{
+                font-size: 14px;
+                color:darkgrey;
+            }
+        </style> 
+
+        <script type="text/javascript"></script>
     </head>
     <body>
-        <h1>Super Sistema</h1>
+        <img src="logo_drogaria.jpg" height="80" width="180">
         <form>
-            <a href="cadastroCliente.jsp">Cadastro de Cliente</a>
-            <a href="relatorioFiliais.jsp">Relatorio por filial</a>
+
+            <h4 style="text-align: center;"> </h4>
+            <div id="retangulo" style="text-align:center; width:100%; height:30px; background-color:#23EBA7">
+                <a href="cadastroCliente.jsp">Cadastro de Cliente</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="ListarClientes">Listar Clientes</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="relatorioFiliais.jsp">Relatorio por filial</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="relatorioProduto.jsp">Relatorio por produto</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="relatorioClientes.jsp">Relatorio por Cliente</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="cadastroProduto.jsp">Cadastro de produto</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="listarProdutos.jsp">Listar Produtos</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="ListarClienteVenda">venda</a>
+            </div>
+            <center>
+            <div class="jumbotron jumbotron-fluid p-1">
+                <div class="container-fluid mr-5"> 
+                    <p class="display-5" style="font-size: 60px" >  Bem vindo!!</p>
+                </div>
+                    <img src="logo_farmasis.jpg" height="250" width="400" align="center">
+                </center>
         </form>
+
     </body>
 </html>

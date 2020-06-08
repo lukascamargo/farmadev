@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +11,7 @@
                 font-family: verdana;
                 font-size:18px;
                 color:#5298C7;
-                text-decoration: none;	
+                text-decoration: none;  
             }
         </style> 
 
@@ -19,6 +21,7 @@
     <img src="logo_drogaria.jpg" height="80" width="180" align="right">
 
     <body>
+        
         <h4 style="text-align: center;"> </h4>
         <div id="retangulo" style="text-align:center; width:100%; height:30px; background-color:#23EBA7">
             <a href="cadastroCliente.jsp">Cadastro de Cliente</a>
@@ -36,61 +39,60 @@
             <a href="listarProdutos.jsp">Listar Produtos</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="ListarClienteVenda">venda</a>
-        </div>					<div class="jumbotron jumbotron-fluid p-1">
+        </div>                  <div class="jumbotron jumbotron-fluid p-1">
             <div class="container-fluid mr-5"> 
-                <h1 class="display-5">Cadastro de Clientes</h1>
+                <h1 class="display-5">Atualizar informa√ß√£o produto</h1>
+      
 
+               
+                    <form action="EditarProduto"method="POST">
+                      
+                       <c:forEach var="c" items="${produto}">
 
-                <div class="form-group">
-                    <form action="CadastroClienteServlet" method="POST">
-
+                       <div class="form-group">    
                         <div class="form-row border">
                             <div class="form-group col-md-auto">
-                                <label> Nome </label>
-                                <input type="text" class="form-control" name= "nome">
+                                <input name="PRD_ID" type="hidden" value="${c.id}"> 
+                            </div>
+                            <div class="form-group col-md-auto">
+                                <label> filial </label>
+                                <input type="text" name="PRD_FILIAL"value="${c.filial}">
                             </div>
 
                             <div class="form-group col-md-5px">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name= "email" placeholder="digite seu e-mail aqui"/>
+                                <label>descri√ß√£o</label>
+                                <input name="PRD_DESCRICAO"  value="${c.descricao}">
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label>CPF</label>
-                                <input type="text" class="form-control" name= "cpf"/>
+                                <label>quantidade</label>
+                                <input name="PRD_QUANTIDADE"  value="${c.quantidade}">
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label> EndereÁo </label>
-                                <input type="text" class="form-control" name= "endereco">
+                                <label> Valor </label>
+                                <input name="PRD_VALOR_UNIT"  value="${c.valor}">
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label> Telefone </label>
-                                <input type="text" class="form-control" name= "telefone">
+                                <label> categoria </label>
+                                <input name="PRD_CATEGORIA"  value="${c.categoria}">
                             </div>
-
-                            <div class="form-group col-md-auto">
-                                <label> GÍnero </label>
-                                <input type="text" class="form-control" name= "genero">
-                            </div>
-
-                            <div class="form-group col-md-auto">
-                                <label> Estado Civil </label>
-                                <input type="text" class="form-control" name= "estadoCivil">
-                            </div>
-
+         
+                            </c:forEach>
                         </div>  
 
                         <div class="container m-3">
-                            <button class="btn btn-outline-success" type="submit" >Criar</button>
-                            <button class="btn btn-outline-secondary" type="reset" >limpar</button> 
+                            <button class="btn btn-outline-success" type="submit" >Atualizar</button>
+                            
                         </div>
                     </form>
                 </div>
-                <div align="center">                     
-                    <a href="index.html">InÌcio</a>   
-                </div>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-                </body>
-                </html>
+    
+
+    <center>
+      <a href="index.html">In√≠cio</a>  
+    </center>      
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

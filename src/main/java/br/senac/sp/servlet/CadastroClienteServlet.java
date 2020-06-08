@@ -18,7 +18,6 @@ public class CadastroClienteServlet extends HttpServlet {
             throws ServletException, IOException {
         //Empty
     }
-
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -26,18 +25,26 @@ public class CadastroClienteServlet extends HttpServlet {
 
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
+        String cpf = request.getParameter("cpf");
+        //Integer.parseInt(request.getParameter("cpf"));
+        String endereco = request.getParameter("endereco");
+        String telefone = request.getParameter("telefone");
+        String genero = request.getParameter("genero");
+        String estadoCivil = request.getParameter("estadoCivil");
+
         
-        Cliente cliente = new Cliente(nome, email);
+        Cliente cliente = new Cliente(nome, email, cpf, endereco, telefone, genero, estadoCivil);
         boolean ok = ClienteDAO.cadastrarCliente(cliente);
         PrintWriter out = response.getWriter();
 
         String url = "";
         if (ok) {
+            request.setAttribute("cadastroOK", true);
             url = "/sucesso.jsp";
         } else {
             url = "/erro.jsp";
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cadastroCliente.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request,response);
        
 

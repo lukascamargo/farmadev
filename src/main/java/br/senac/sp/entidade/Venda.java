@@ -12,14 +12,25 @@ package br.senac.sp.entidade;
 public class Venda {
 
     private String filial;
+
+
     private int id;
     private String usuario;
     private String cpf;    
-    private float total;
+    private Double total;
     private String data;
-    private float desconto;
+    private Double desconto;    
+    
+    public Venda(String filial, String usuario, String cpf, double total, String data, double desconto) {
+        this.filial = filial;
+        this.usuario = usuario;
+        this.cpf = cpf;
+        this.total = total;
+        this.data = data;
+        this.desconto = desconto;
+    }
 
-    public Venda(int id , String filial, String usuario, String cpf, float total,  String data, float desconto ) {
+    public Venda(int id , String filial, String usuario, String cpf, double total,  String data, double desconto ) {
   
     this.filial = filial;
     this.id=id;
@@ -31,11 +42,11 @@ public class Venda {
     
     }
 
-    public float getDesconto() {
+    public double getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(float desconto) {
+    public void setDesconto(double desconto) {
         this.desconto = desconto;
     }
 
@@ -71,11 +82,11 @@ public class Venda {
         this.cpf = cpf;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

@@ -5,51 +5,45 @@
  */
 package br.senac.sp.servlet;
 
-
-import br.senac.sp.dao.VendasDAO;
-import br.senac.sp.entidade.Venda;
+import br.senac.sp.dao.ClienteDAO;
+import br.senac.sp.entidade.Cliente;
 import java.io.IOException;
+import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author diego
+ * @author KIQ
  */
-public class RelatorioFiliais extends HttpServlet{
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+@WebServlet(name = "EditarServlet", urlPatterns = {"/EditarServlet"})
+public class EditarServlet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
-    private String filial;
-    private String dataini;
-    private String datafim;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          this.filial = request.getParameter("Filial");
-          this.dataini = request.getParameter("dataini");
-          this.datafim = request.getParameter("datafim");
-          
-            List<Venda> vendas = VendasDAO.listarVendas("="+filial, dataini,datafim);
-            
-        request.setAttribute("Vendas", vendas);
-        
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/relatorioFiliais.jsp");
+          int id = Integer.parseInt(request.getParameter("ID"));
+       List<Cliente> cliente = ClienteDAO.BuscarClientes(id);  
+        request.setAttribute("cliente", cliente);
+       
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atualizarCliente.jsp");
         dispatcher.forward(request,response);
     }
-
-    public String getFilial() {
-        return filial;
-    }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -76,10 +70,32 @@ public class RelatorioFiliais extends HttpServlet{
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException { 
+           
+        int sid = Integer.parseInt(request.getParameter("ID"));         
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String cpf = request.getParameter("cpf");
+        String endereco = request.getParameter("endereco");
+        String telefone = request.getParameter("telefone");
+        String genero = request.getParameter("genero");
+        String estadoCivil = request.getParameter("estadoCivil");
+
+        Cliente e = new Cliente(nome, email, cpf, endereco, telefone, genero, estadoCivil,sid);
+                
+       boolean ok =ClienteDAO.update(e);
+        if (ok =! false) {
+            request.setAttribute("/sucesso.jsp", true);
+                  
+        } else {
+            out.println("Erro");
+        }
+
+        out.close();
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ListarClientes");
+            dispatcher.forward(request,response);
+
         
-        String filial = request.getParameter("sfilial");
-          processRequest(request, response);
     }
 
     /**
@@ -93,6 +109,3 @@ public class RelatorioFiliais extends HttpServlet{
     }// </editor-fold>
 
 }
-
-    
-

@@ -5,7 +5,6 @@
  */
 package br.senac.sp.servlet;
 
-
 import br.senac.sp.dao.VendasDAO;
 import br.senac.sp.entidade.Venda;
 import java.io.IOException;
@@ -20,36 +19,33 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author diego
  */
-public class RelatorioFiliais extends HttpServlet{
+public class RelatorioClientes extends HttpServlet {
+
     /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
 
      */
-    private String filial;
+    private String cpf;
     private String dataini;
     private String datafim;
-    
+    private String filial;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          this.filial = request.getParameter("Filial");
-          this.dataini = request.getParameter("dataini");
-          this.datafim = request.getParameter("datafim");
-          
-            List<Venda> vendas = VendasDAO.listarVendas("="+filial, dataini,datafim);
-            
-        request.setAttribute("Vendas", vendas);
-        
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/relatorioFiliais.jsp");
-        dispatcher.forward(request,response);
-    }
+        this.cpf = request.getParameter("relatorio_cpf");
+        this.dataini = request.getParameter("dataini");
+        this.datafim = request.getParameter("datafim");
+        this.filial = request.getParameter("Filial");
 
-    public String getFilial() {
-        return filial;
+        List<Venda> vendas = VendasDAO.listarVendasCli("="+filial, cpf, dataini, datafim);
+        request.setAttribute("Vendas", vendas);
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/relatorioClientes.jsp");
+        dispatcher.forward(request, response);
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -77,9 +73,9 @@ public class RelatorioFiliais extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String filial = request.getParameter("sfilial");
-          processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -93,6 +89,3 @@ public class RelatorioFiliais extends HttpServlet{
     }// </editor-fold>
 
 }
-
-    
-

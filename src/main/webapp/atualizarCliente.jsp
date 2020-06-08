@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +21,7 @@
     <img src="logo_drogaria.jpg" height="80" width="180" align="right">
 
     <body>
+        
         <h4 style="text-align: center;"> </h4>
         <div id="retangulo" style="text-align:center; width:100%; height:30px; background-color:#23EBA7">
             <a href="cadastroCliente.jsp">Cadastro de Cliente</a>
@@ -38,59 +41,66 @@
             <a href="ListarClienteVenda">venda</a>
         </div>					<div class="jumbotron jumbotron-fluid p-1">
             <div class="container-fluid mr-5"> 
-                <h1 class="display-5">Cadastro de Clientes</h1>
+                <h1 class="display-5">Atualizar informaÃ§Ã£o cliente</h1>
+      
 
-
-                <div class="form-group">
-                    <form action="CadastroClienteServlet" method="POST">
-
+               
+                    <form action="EditarServlet"method="POST">
+                      
+                        <c:forEach var="c" items="${cliente}">
+                       <div class="form-group">    
                         <div class="form-row border">
                             <div class="form-group col-md-auto">
+                                <input name="ID" type="hidden" value="${c.id}"> 
+                            </div>
+                            <div class="form-group col-md-auto">
                                 <label> Nome </label>
-                                <input type="text" class="form-control" name= "nome">
+                                <input type="text" class="form-control" name="nome"value="${c.nome}">
                             </div>
 
                             <div class="form-group col-md-5px">
                                 <label>Email</label>
-                                <input type="text" class="form-control" name= "email" placeholder="digite seu e-mail aqui"/>
+                                <input  type="text" class="form-control" name="email"  value="${c.email}">
                             </div>
 
                             <div class="form-group col-md-auto">
                                 <label>CPF</label>
-                                <input type="text" class="form-control" name= "cpf"/>
+                                <input type="text" class="form-control" name="cpf"  value="${c.cpf}">
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label> Endereço </label>
-                                <input type="text" class="form-control" name= "endereco">
+                                <label> EndereÃ§o </label>
+                                <input type="text" class="form-control" name="endereco"  value="${c.endereco}">
                             </div>
 
                             <div class="form-group col-md-auto">
                                 <label> Telefone </label>
-                                <input type="text" class="form-control" name= "telefone">
+                                <input type="text" class="form-control" name="telefone"  value="${c.telefone}">
                             </div>
 
                             <div class="form-group col-md-auto">
-                                <label> Gênero </label>
-                                <input type="text" class="form-control" name= "genero">
+                                <label> GÃªnero </label>
+                                <input type="text" class="form-control" name="genero"  value="${c.genero}">
                             </div>
-
                             <div class="form-group col-md-auto">
-                                <label> Estado Civil </label>
-                                <input type="text" class="form-control" name= "estadoCivil">
+                                &nbsp;&nbsp;
+                                <label> Estado Civil </label>                                
+                                <input type="text" class="form-control" name="estadoCivil"  value="${c.estadoCivil}">
                             </div>
-
+                            </c:forEach>
                         </div>  
 
                         <div class="container m-3">
-                            <button class="btn btn-outline-success" type="submit" >Criar</button>
-                            <button class="btn btn-outline-secondary" type="reset" >limpar</button> 
+                            <button class="btn btn-outline-success" type="submit" >Atualizar</button>
+                            
                         </div>
                     </form>
                 </div>
-                <div align="center">                     
-                    <a href="index.html">Início</a>   
-                </div>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-                </body>
-                </html>
+    
+
+    <center>
+      <a href="index.html">InÃ­cio</a>  
+    </center>      
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
