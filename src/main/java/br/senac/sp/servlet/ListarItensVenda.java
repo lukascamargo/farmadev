@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import br.senac.sp.servlet.ListarClienteVenda;
+import static br.senac.sp.servlet.ListarClienteVenda.getFILIAL;
 
 /**
  *
@@ -51,9 +52,10 @@ public class ListarItensVenda extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            List<Produto> Produto = ProdutosDAO.listarProdutos();
+            
+            List<Produto> Produto = ProdutosDAO.listarProdutos(ListarClienteVenda.getFILIAL());
             request.setAttribute("Produto", Produto);        
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarItensVenda.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/listarItensVenda.jsp");
             dispatcher.forward(request, response);
 
         }
@@ -107,8 +109,10 @@ public class ListarItensVenda extends HttpServlet {
 
         List<Cliente> cli = ClienteDAO.BuscarClientes(ListarClienteVenda.getIDC());
         request.setAttribute("cli", cli);
+        
+         request.setAttribute("fil", getFILIAL());
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/preVenda.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/preVenda.jsp");
         dispatcher.forward(request, response);
     }
 

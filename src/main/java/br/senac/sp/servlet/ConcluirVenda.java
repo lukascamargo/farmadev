@@ -5,12 +5,12 @@
  */
 package br.senac.sp.servlet;
 
-import br.senac.sp.dao.ClienteDAO;
 import br.senac.sp.dao.VendasDAO;
 import br.senac.sp.entidade.Venda;
 import java.io.IOException;
 import java.io.PrintWriter;
 import br.senac.sp.servlet.ListarClienteVenda;
+import static br.senac.sp.servlet.ListarClienteVenda.getFILIAL;
  
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,17 +39,17 @@ public class ConcluirVenda extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
                              
       String cpf = ListarClienteVenda.getCPF();
-      double desconto = Double.parseDouble("00");
-      double total = Double.parseDouble("00");
+      double desconto = Double.parseDouble(request.getParameter("Desconto"));
+      double total = Double.parseDouble(request.getParameter("TotalVenda"));
       String data = "";
-      String usuario = "anonimus";
+      String usuario = "ANONIMO";
+       String filial = Integer.toString(getFILIAL());
       
+     Venda vnd = new Venda (filial,usuario, cpf, total, data, desconto );
       
-     Venda vnd = new Venda ("1",usuario, cpf, total, data, desconto );
-      
-      VendasDAO.Concluir(vnd);
-      
-     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/sucesso.jsp");
+     int ID = VendasDAO.Concluir(vnd);
+       request.setAttribute("ID", ID);
+     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/sucesso.jsp");
             dispatcher.forward(request,response);
       
         }

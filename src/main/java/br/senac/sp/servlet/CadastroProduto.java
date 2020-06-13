@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * @author Renato
+ */
 
 public class CadastroProduto extends HttpServlet {
 
@@ -36,9 +40,9 @@ public class CadastroProduto extends HttpServlet {
         String url = "";
         if (ok) {
             request.setAttribute("cadastroOK", true);
-            url = "/sucesso.jsp";
+            url = "/protegido/sucesso.jsp";
         } else {
-            url = "/erro.jsp";
+            url = "/protegido/erro.jsp";
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request,response);

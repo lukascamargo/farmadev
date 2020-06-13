@@ -16,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import br.senac.sp.servlet.ItensVendaServlet;
+
 
 /**
  *
@@ -50,6 +52,16 @@ public class ListarClienteVenda extends HttpServlet {
     public void setIDC(int IDC) {
         this.IDC = IDC;
     }
+    
+    public static int FILIAL;
+
+    public static int getFILIAL() {
+        return FILIAL;
+    }
+
+    public void setFILIAL(int FILIAL) {
+        this.FILIAL = FILIAL;
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,7 +69,7 @@ public class ListarClienteVenda extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             List<Cliente> clientes = ClienteDAO.listarClientes();
             request.setAttribute("clientes", clientes);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientesVendas.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/listarClientesVendas.jsp");
             dispatcher.forward(request, response);
         }
     }
@@ -93,12 +105,16 @@ public class ListarClienteVenda extends HttpServlet {
         String cpf = request.getParameter("CPF");
         setCPF(cpf);
         setIDC(sid);
+        setFILIAL(Integer.parseInt(request.getParameter("Filial")));   
+         request.setAttribute("fil", getFILIAL());
 
         List<Cliente> cli = ClienteDAO.BuscarClientes(sid);
         request.setAttribute("cli", cli);
-
+        
+ ItensVendaServlet.limpar();
+           
         out.close();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/preVenda.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/preVenda.jsp");
         dispatcher.forward(request, response);
     }
 

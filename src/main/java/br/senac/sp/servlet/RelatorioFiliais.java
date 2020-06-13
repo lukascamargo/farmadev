@@ -34,14 +34,15 @@ public class RelatorioFiliais extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          this.filial = request.getParameter("Filial");
+          this.filial = request.getParameter("filial");
           this.dataini = request.getParameter("dataini");
           this.datafim = request.getParameter("datafim");
           
             List<Venda> vendas = VendasDAO.listarVendas("="+filial, dataini,datafim);
+            
         request.setAttribute("Vendas", vendas);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/relatorioFiliais.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/admin/relatorioFiliais.jsp");
         dispatcher.forward(request,response);
     }
 

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author KIQ
  */
-@WebServlet(name = "EditarProduto", urlPatterns = {"/EditarProduto"})
+@WebServlet(name = "EditarProduto", urlPatterns = {"/protegido/admin/EditarProduto"})
 public class EditarProduto extends HttpServlet {
 
     /**
@@ -41,8 +41,8 @@ public class EditarProduto extends HttpServlet {
        List<Produto> produto = ProdutosDAO.BuscarProdutos(pid);  
         request.setAttribute("produto", produto);
        
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atualizarProduto.jsp");
-        dispatcher.forward(request,response);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/admin/atualizarProduto.jsp");
+        dispatcher.forward(request,response);                                    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -84,14 +84,14 @@ public class EditarProduto extends HttpServlet {
                 
        boolean ok =ProdutosDAO.update(e);
         if (ok =! false) {
-            request.setAttribute("/sucesso.jpg", true);
+            request.setAttribute("sucesso.jpg", true);
                   
         } else {
             out.println("Erro");
         }
 
         out.close();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ListarProdutos");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/sucesso.jsp");
             dispatcher.forward(request,response);
 
         

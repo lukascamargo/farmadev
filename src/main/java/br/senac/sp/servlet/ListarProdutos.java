@@ -36,10 +36,10 @@ public class ListarProdutos extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        List<Produto> produtos = ProdutosDAO.listarProdutos();
+        int filial = Integer.parseInt(request.getParameter("filial"));
+        List<Produto> produtos = ProdutosDAO.listarProdutos(filial);
         request.setAttribute("produtos", produtos);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarProdutos.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/listarProdutos.jsp");
         dispatcher.forward(request,response);
     }
 

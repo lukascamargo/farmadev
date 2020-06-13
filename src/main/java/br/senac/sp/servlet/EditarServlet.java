@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author KIQ
  */
-@WebServlet(name = "EditarServlet", urlPatterns = {"/EditarServlet"})
+@WebServlet(name = "EditarServlet", urlPatterns = {"/protegido/admin/EditarServlet"})
 public class EditarServlet extends HttpServlet {
 
     /**
@@ -41,7 +41,7 @@ public class EditarServlet extends HttpServlet {
        List<Cliente> cliente = ClienteDAO.BuscarClientes(id);  
         request.setAttribute("cliente", cliente);
        
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atualizarCliente.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/admin/atualizarCliente.jsp");
         dispatcher.forward(request,response);
     }
 
@@ -92,7 +92,7 @@ public class EditarServlet extends HttpServlet {
         }
 
         out.close();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ListarClientes");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/ListarClientes");
             dispatcher.forward(request,response);
 
         

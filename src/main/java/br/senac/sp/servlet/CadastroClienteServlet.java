@@ -1,3 +1,4 @@
+//oi
 package br.senac.sp.servlet;
 
 import br.senac.sp.dao.ClienteDAO;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * @author Caique
+ */
 
 public class CadastroClienteServlet extends HttpServlet {
 
@@ -40,9 +45,9 @@ public class CadastroClienteServlet extends HttpServlet {
         String url = "";
         if (ok) {
             request.setAttribute("cadastroOK", true);
-            url = "/sucesso.jsp";
+            url = "/protegido/sucesso.jsp";
         } else {
-            url = "/erro.jsp";
+            url = "/protegido/erro.jsp";
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request,response);

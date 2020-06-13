@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author tscarton
+ * @author Caique
  */
 public class ListarClientes extends HttpServlet {
 
@@ -37,7 +37,8 @@ public class ListarClientes extends HttpServlet {
         
         List<Cliente> clientes = ClienteDAO.listarClientes();
         request.setAttribute("clientes", clientes);       
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/listarClientes.jsp");   
+       // RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarClientes.jsp");
         dispatcher.forward(request,response);
     }
 

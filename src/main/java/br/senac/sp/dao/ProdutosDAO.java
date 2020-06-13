@@ -100,13 +100,17 @@ public class ProdutosDAO {
         return produto;
     }
 
-    public static List<Produto> listarProdutos() {
+    public static List<Produto> listarProdutos( int Filial) {
         List<Produto> produtos = new ArrayList<>();
         boolean ok = false;
         Connection con;
+        String a = null;
+        if (Filial==0) {a= "is not null";}
+        else a= "= "+Filial;
+        
         try {
             con = ConexaoDB.getConexao();
-            String sql = "select * from PRODUTO";
+            String sql = "select * from PRODUTO where PRD_FILIAL "+a;
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

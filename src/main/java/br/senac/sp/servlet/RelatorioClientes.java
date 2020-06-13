@@ -43,7 +43,7 @@ public class RelatorioClientes extends HttpServlet {
         List<Venda> vendas = VendasDAO.listarVendasCli("="+filial, cpf, dataini, datafim);
         request.setAttribute("Vendas", vendas);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/relatorioClientes.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/admin/relatorioClientes.jsp");
         dispatcher.forward(request, response);
     }
 

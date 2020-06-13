@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author KIQ
  */
-@WebServlet(name = "DeletarProduto", urlPatterns = {"/DeletarProduto"})
+@WebServlet(name = "DeletarProduto", urlPatterns = {"/protegido/admin/DeletarProduto"})
 public class DeletarProduto extends HttpServlet {
 
     /**
@@ -35,7 +35,7 @@ public class DeletarProduto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String sid = request.getParameter("PRD_ID");
         ProdutosDAO.excluir(sid);
-        response.sendRedirect("ListarProdutos");
+        response.sendRedirect("/protegido/sucesso.jsp");
 
     }
 

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author KIQ
  */
-@WebServlet(name = "DeleteServlet", urlPatterns = {"/DeleteServlet"})
+@WebServlet(name = "DeleteServlet", urlPatterns = {"/protegido/admin/DeleteServlet"})
 public class DeleteServlet extends HttpServlet {
 
     /**
@@ -35,8 +35,9 @@ public class DeleteServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String sid = request.getParameter("ID");
         ClienteDAO.excluir(sid);
-        response.sendRedirect("ListarClientes");
-
+        response.sendRedirect("/protegido/sucesso.jsp");
+        
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

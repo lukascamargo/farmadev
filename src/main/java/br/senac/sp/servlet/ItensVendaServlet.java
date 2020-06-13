@@ -8,6 +8,7 @@ package br.senac.sp.servlet;
 import br.senac.sp.dao.ClienteDAO;
 import br.senac.sp.entidade.Cliente;
 import br.senac.sp.entidade.ItensVenda;
+import static br.senac.sp.servlet.ListarClienteVenda.getFILIAL;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,22 +21,30 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author KIQ
+ * @author Caique
  */
 public class ItensVendaServlet extends HttpServlet {
 
-    public static List<ItensVenda> item;
+    public static List<ItensVenda> item = new ArrayList<>();
 
     public static List<ItensVenda> getItem() {
         return item;
     }
-
-    public static void setItem(List<ItensVenda> item) {
-        ItensVendaServlet.item = item;
+    
+    public static void limpar (){
+    item = new ArrayList<>();
+   
     }
 
-    List<ItensVenda> vnd = new ArrayList<>();
+ 
+    private double totalVenda ;
 
+    public double getTotalVenda() {
+        return totalVenda;
+    }
+
+  //  List<ItensVenda> vnd = new ArrayList<>();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,25 +59,29 @@ public class ItensVendaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            //  int sid = Integer.parseInt(request.getParameter("ItensVendaID"));
-            //  itens.add(ProdutosDAO.produtoSelecionado(sid));
-            //  request.setAttribute("itens", itens);
+       
             int produtoID = Integer.parseInt(request.getParameter("Produto"));
             String descricao = request.getParameter("Descricao");
             int quantidade = Integer.parseInt(request.getParameter("Quantidade"));
             double valorUnitario = Double.parseDouble(request.getParameter("ValorUnitario"));
             double total = Double.parseDouble(request.getParameter("Total"));
             String dataVenda = "";
-
-            //   ItensVenda ivn = new ItensVenda(produtoID, descricao, quantidade, valorUnitario, total, dataVenda);
-            request.setAttribute("vnd", vnd);
-            vnd.add(new ItensVenda(produtoID, descricao, quantidade, valorUnitario, total, dataVenda));
-            setItem(vnd);
-
+            
+           ItensVenda Itens = new ItensVenda(produtoID, descricao, quantidade, valorUnitario, total, dataVenda);
+           
+           this.item.add(Itens);
+                   
+            request.setAttribute("item", this.item);
+            
             List<Cliente> cli = ClienteDAO.BuscarClientes(ListarClienteVenda.getIDC());
             request.setAttribute("cli", cli);
+   
+            totalVenda= total+getTotalVenda();
+            request.setAttribute("tvenda", totalVenda);
+            
+             request.setAttribute("fil", getFILIAL());
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/preVenda.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/preVenda.jsp");
             dispatcher.forward(request, response);
         }
     }
@@ -99,7 +112,18 @@ public class ItensVendaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+            //item=null;
+        
+             List<Cliente> cli = ClienteDAO.BuscarClientes(ListarClienteVenda.getIDC());
+            request.setAttribute("cli", cli);
+            item=new ArrayList<>();
+            totalVenda= 0;
+            request.setAttribute("tvenda", totalVenda);
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/protegido/preVenda.jsp");
+            dispatcher.forward(request, response);
+
     }
 
     /**
@@ -111,5 +135,6 @@ public class ItensVendaServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
 
 }

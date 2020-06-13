@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AutorizacaoFilter</filter-name>
+        <filter-class>br.senac.sp.filtro.AutorizacaoFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AutorizacaoFilter</filter-name>
+        <url-pattern>/protegido/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>CadastroClienteServlet</servlet-name>
         <servlet-class>br.senac.sp.servlet.CadastroClienteServlet</servlet-class>
@@ -7,6 +15,14 @@
     <servlet>
         <servlet-name>ListarClientes</servlet-name>
         <servlet-class>br.senac.sp.servlet.ListarClientes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>br.senac.sp.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>br.senac.sp.servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListarProdutos</servlet-name>
@@ -32,9 +48,17 @@
         <servlet-name>ItensVendaServlet</servlet-name>
         <servlet-class>br.senac.sp.servlet.ItensVendaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RelatorioProdutos</servlet-name>
+        <servlet-class>br.senac.sp.servlet.RelatorioProdutos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilialVenda</servlet-name>
+        <servlet-class>br.senac.sp.servlet.FilialVenda</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CadastroClienteServlet</servlet-name>
-        <url-pattern>/CadastroClienteServlet</url-pattern>
+        <url-pattern>/protegido/admin/CadastroClienteServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>EditarServlet</servlet-name>
@@ -42,15 +66,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>EditarServlet</servlet-name>
-        <url-pattern>/EditarServlet</url-pattern>
+        <url-pattern>/protegido/admin/EditarServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListarClientes</servlet-name>
-        <url-pattern>/ListarClientes</url-pattern>
+        <url-pattern>/protegido/ListarClientes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListarProdutos</servlet-name>
-        <url-pattern>/ListarProdutos</url-pattern>
+        <url-pattern>/protegido/ListarProdutos</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>RelatorioFiliais</servlet-name>
@@ -58,7 +82,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RelatorioFiliais</servlet-name>
-        <url-pattern>/RelatorioFiliais</url-pattern>
+        <url-pattern>/protegido/admin/RelatorioFiliais</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>RelatorioClientes</servlet-name>
@@ -66,23 +90,23 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RelatorioClientes</servlet-name>
-        <url-pattern>/RelatorioClientes</url-pattern>
+        <url-pattern>/protegido/admin/RelatorioClientes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CadastroProduto</servlet-name>
-        <url-pattern>/CadastroProduto</url-pattern>
+        <url-pattern>/protegido/admin/CadastroProduto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeletarProduto</servlet-name>
-        <url-pattern>/DeletarProduto</url-pattern>
+        <url-pattern>/protegido/admin/DeletarProduto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditarProduto</servlet-name>
-        <url-pattern>/EditarProduto</url-pattern>
+        <url-pattern>/protegido/admin/EditarProduto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>atualizarProduto</servlet-name>
-        <url-pattern>/atualizarProduto</url-pattern>
+        <url-pattern>/protegido/admin/atualizarProduto</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>ConcluirVenda</servlet-name>
@@ -90,11 +114,11 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ConcluirVenda</servlet-name>
-        <url-pattern>/ConcluirVenda</url-pattern>
+        <url-pattern>/protegido/ConcluirVenda</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListarItensVenda</servlet-name>
-        <url-pattern>/ListarItensVenda</url-pattern>
+        <url-pattern>/protegido/ListarItensVenda</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>ListarItensVenda</servlet-name>
@@ -106,15 +130,34 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ListarClienteVenda</servlet-name>
-        <url-pattern>/ListarClienteVenda</url-pattern>
+        <url-pattern>/protegido/ListarClienteVenda</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ItensVendaServlet</servlet-name>
-        <url-pattern>/ItensVendaServlet</url-pattern>
+        <url-pattern>/protegido/ItensVendaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RelatorioProdutos</servlet-name>
+        <url-pattern>/protegido/admin/RelatorioProdutos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/protegido/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilialVenda</servlet-name>
+        <url-pattern>/protegido/FilialVenda</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>protegido/index.html</welcome-file>
+    </welcome-file-list>
 </web-app>
